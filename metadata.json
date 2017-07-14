@@ -2,7 +2,7 @@
   "name": "puppet-skydive",
   "version": "0.1.0",
   "author": "puppet",
-  "summary": null,
+  "summary": "A module for managing an open source real-time network topology and protocols analyzer.",
   "license": "Apache-2.0",
   "source": "",
   "project_page": null,
@@ -12,4 +12,3 @@
   ],
   "data_provider": null
 }
-
