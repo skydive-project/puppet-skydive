@@ -16,7 +16,6 @@
 
 This module sets up [Skydive](https://github.com/skydive-project/skydive), an open source real-time network topology and protocols analyzer.
 
-
 ## Setup
 
 ### What skydive affects
