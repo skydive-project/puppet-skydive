@@ -5,6 +5,7 @@ class skydive::install::analyzer {
     'RedHat': {
       package { 'skydive-analyzer':
         ensure => installed,
+        notify => Exec['skydive-analyzer: reload systemd'],
       }
     }
     default: {

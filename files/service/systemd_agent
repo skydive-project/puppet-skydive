@@ -1,0 +1,12 @@
+[Unit]
+Description=Skydive agent
+After=network-online.target openvswitch.service docker.service
+
+[Service]
+Type=simple
+EnvironmentFile=-/etc/sysconfig/skydive-agent
+ExecStart=/usr/bin/skydive agent $SKYDIVE_AGENT_OPTIONS --conf /etc/skydive/skydive-agent.yml
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
