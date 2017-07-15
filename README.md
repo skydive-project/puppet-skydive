@@ -69,6 +69,13 @@ skydive::analyzers:
   - 192.168.10.10:8082
 ```
 
+Change default address and port of the analyzer's UI. (don't forget to correct the port in skydive::analyzers)
+
+```
+---
+skydive::analyzer::listen: 0.0.0.0:80
+```
+
 ## Limitations
 
 The module has been tested on:
