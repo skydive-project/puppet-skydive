@@ -3,9 +3,8 @@
 #### Table of Contents
 
 1. [Description](#description)
-1. [Setup - The basics of getting started with skydive](#setup)
+1. [Setup](#setup)
     * [What skydive affects](#what-skydive-affects)
-    * [Setup requirements](#setup-requirements)
     * [Beginning with skydive](#beginning-with-skydive)
 1. [Usage - Configuration options and additional functionality](#usage)
 1. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
@@ -21,22 +20,17 @@ This module sets up [Skydive](https://github.com/skydive-project/skydive), an op
 ### What skydive affects
 
 The module offers a class to install and manage the Skydive Analyzer and Agent separately.
-Optionally, Elastisearch can be managed.
-
-### Setup Requirements **OPTIONAL**
-
 
 ### Beginning with skydive
 
-The very basic steps needed for a user to get the module up and running. This
-can include setup steps, if necessary, or it can be an example of the most
-basic use of the module.
-
 ## Usage
 
-This section is where you describe how to customize, configure, and do the
-fancy stuff with your module here. It's especially helpful if you include usage
-examples and code samples for doing things with your module.
+Simple include with defaults
+
+```
+  include ::skydive::agent
+  include ::skydive::analyzer
+```
 
 ## Limitations
 
