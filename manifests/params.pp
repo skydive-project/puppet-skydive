@@ -22,8 +22,19 @@ class skydive::params {
     'expire'  => 300,
     'cleanup' => 30,
   }
+  $analyzers                           = [
+    '127.0.0.1:8082',
+  ]
+  $etcd                                = {
+    'embedded'       => true,
+    'listen'         => '0.0.0.0:2379',
+    'servers'        => [
+      'http://127.0.0.1:2379',
+    ],
+    'client_timeout' => 5,
+  }
 
-  $analyzer_listen                     = '127.0.0.1:8082'
+  $analyzer_listen                     = '0.0.0.0:8082'
   $analyzer_flowtable_expire           = 600
   $analyzer_flowtable_update           = 60
   $analyzer_storage                    = {}
@@ -40,7 +51,7 @@ class skydive::params {
   $analyzer_bandwidth_relative_warning = 0.4
   $analyzer_bandwidth_relative_alert   = 0.8
 
-  $agent_listen                        = '127.0.0.1:8081'
+  $agent_listen                        = '0.0.0.0:8081'
   $agent_topology                      = {
     'probes'  => [],
     'netlink' => {}

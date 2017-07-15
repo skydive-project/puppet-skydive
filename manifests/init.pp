@@ -5,6 +5,8 @@ class skydive (
   $logging          = $::skydive::params::logging,
   $graph            = $::skydive::params::graph,
   $cache            = $::skydive::params::cache,
+  $analyzers        = $::skydive::params::analyzers,
+  $etcd             = $::skydive::params::etcd,
   $ws_pong_timeout  = $::skydive::params::ws_pong_timeout,
   $ws_bulk_maxmsg   = $::skydive::params::ws_bulk_maxmsg,
   $ws_bulk_maxdelay = $::skydive::params::ws_bulk_maxdelay,

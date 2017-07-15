@@ -8,5 +8,7 @@ class skydive::config::common {
     'cache'                        => $::skydive::cache,
     'logging'                      => $::skydive::logging,
     'graph'                        => $::skydive::graph,
+    'analyzers'                    => $::skydive::analyzers,
+    'etcd'                         => $::skydive::etcd,
   }
 }

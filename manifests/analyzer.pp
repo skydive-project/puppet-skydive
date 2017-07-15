@@ -23,9 +23,9 @@ class skydive::analyzer (
   contain ::skydive::config::analyzer
   contain ::skydive::service::analyzer
 
-  Class['skydive']
-  -> Class['skydive::install::analyzer']
-  -> Class['skydive::config::analyzer']
-  -> Class['skydive::service::analyzer']
+  Class['::skydive']
+  -> Class['::skydive::install::analyzer']
+  -> Class['::skydive::config::analyzer']
+  -> Class['::skydive::service::analyzer']
 
 }
