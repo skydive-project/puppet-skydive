@@ -66,7 +66,7 @@ Configure the agents to talk to the analyzer
 ```
 ---
 skydive::analyzers:
-  - 192.168.10.10:80
+  - 192.168.10.10:8082
 ```
 
 ## Limitations
