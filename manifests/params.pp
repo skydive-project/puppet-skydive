@@ -63,6 +63,6 @@ class skydive::params {
     ]
   }
   $agent_metadata                      = {
-    'info' => 'This is compute node'
+    'info' => "This is compute node ${::fqdn}"
   }
 }
