@@ -22,26 +22,10 @@ class skydive::config::analyzer {
     }
   }
 
-  $common_config_hash = {
-    'host_id'                      => $::skydive::host_id,
-    'ws_pong_timeout'              => $::skydive::ws_pong_timeout,
-    'ws_bulk_maxmsg'               => $::skydive::ws_bulk_maxmsg,
-    'ws_bulk_maxdelay'             => $::skydive::ws_bulk_maxdelay,
-    'cache'                        => $::skydive::cache,
-    'logging'                      => $::skydive::logging,
-    'graph'                        => $::skydive::graph,
-    'analyzers'                    => $::skydive::analyzers,
-    'etcd'                         => $::skydive::etcd,
-  }
-
-  $merged_config_hash = merge($common_config_hash, $analyzer_config_hash)
-
-  $config = inline_template("<%= ${merged_config_hash}.to_yaml.gsub(/^\s{2}/, '') %>")
-
-  file { '/etc/skydive/skydive-analyzer.yml':
-    ensure  => file,
-    mode    => '0644',
-    content => $config,
+  concat::fragment {'analyzers':
+    target  => '/etc/skydive/skydive-analyzer.yml',
+    order   => '20',
+    content => inline_template("<%= ${analyzer_config_hash}.to_yaml.gsub(/^\s{2}/, '') %>")
   }
 
 }

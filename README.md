@@ -22,6 +22,9 @@ This module sets up [Skydive](https://github.com/skydive-project/skydive), an op
 
 This module relies on hiera in order to manage the common settings in the skydive class.
 
+* hiera
+* [concat](https://github.com/puppetlabs/puppetlabs-concat) <= 2.2.1
+
 ### What skydive affects
 
 The module offers a class to install and manage the Skydive Analyzer and Agent separately.

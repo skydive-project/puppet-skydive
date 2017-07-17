@@ -6,7 +6,7 @@ class skydive::service::analyzer {
     enable     => true,
     hasrestart => true,
     hasstatus  => true,
-    subscribe  => File['/etc/skydive/skydive-analyzer.yml'],
+    subscribe  => Concat['/etc/skydive/skydive-analyzer.yml'],
     require    => File['/etc/systemd/system/skydive-analyzer.service'],
   }
 
