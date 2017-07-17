@@ -6,9 +6,8 @@ class skydive::agent (
   $topology  = $::skydive::params::agent_topology,
   $flow      = $::skydive::params::agent_flow,
   $metadata  = $::skydive::params::agent_metadata,
-) inherits ::skydive::params {
+) inherits ::skydive {
 
-  contain ::skydive
   contain ::skydive::install::agent
   contain ::skydive::config::agent
   contain ::skydive::service::agent

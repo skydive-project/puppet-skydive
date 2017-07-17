@@ -16,9 +16,8 @@ class skydive::analyzer (
   $bandwidth_relative_active  = $::skydive::params::analyzer_bandwidth_relative_active,
   $bandwidth_relative_warning = $::skydive::params::analyzer_bandwidth_relative_warning,
   $bandwidth_relative_alert   = $::skydive::params::analyzer_bandwidth_relative_alert,
-) inherits ::skydive::params {
+) inherits ::skydive {
 
-  contain ::skydive
   contain ::skydive::install::analyzer
   contain ::skydive::config::analyzer
   contain ::skydive::service::analyzer

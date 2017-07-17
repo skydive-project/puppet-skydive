@@ -22,22 +22,13 @@ class skydive::config::analyzer {
     }
   }
 
-  concat {'skydive-analyzer':
-    ensure => present,
-    path   => '/etc/skydive/skydive-analyzer.yml',
-    notify => Service['skydive-analyzer']
-  }
+  $merged_config_hash = merge($::skydive::configuration, $analyzer_config_hash)
 
-  concat::fragment {'skydive-analyzer-common':
-    target  => 'skydive-analyzer',
-    order   => '10',
-    content => inline_template("<%= scope.lookupvar('skydive::configuration').to_yaml.gsub(/^\s{2}/, '') %>"),
-  }
-
-  concat::fragment {'skydive-analyzer-main':
-    target  => 'skydive-analyzer',
-    order   => '20',
-    content => inline_template("<%= ${analyzer_config_hash}.to_yaml.gsub(/^\s{2}/, '') %>"),
+  file { '/etc/skydive/skydive-analyzer.yml':
+    ensure  => file,
+    mode    => '0644',
+    content => inline_template("<%= ${merged_config_hash}.to_yaml.gsub(/^\s{2}/, '') %>"),
+    notify  => Service['skydive-analyzer'],
   }
 
 }

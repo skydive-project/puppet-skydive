@@ -12,22 +12,13 @@ class skydive::config::agent {
     }
   }
 
-  concat {'skydive-agent':
-    ensure => present,
-    path   => '/etc/skydive/skydive-agent.yml',
-    notify => Service['skydive-agent']
-  }
+  $merged_config_hash = merge($::skydive::configuration, $agent_config_hash)
 
-  concat::fragment {'skydive-agent-common':
-    target  => 'skydive-agent',
-    order   => '10',
-    content => inline_template("<%= scope.lookupvar('skydive::configuration').to_yaml.gsub(/^\s{2}/, '') %>"),
-  }
-
-  concat::fragment {'skydive-agent-main':
-    target  => 'skydive-agent',
-    order   => '20',
-    content => inline_template("<%= ${agent_config_hash}.to_yaml.gsub(/^\s{2}/, '') %>"),
+  file { '/etc/skydive/skydive-agent.yml':
+    ensure  => file,
+    mode    => '0644',
+    content => inline_template("<%= ${merged_config_hash}.to_yaml.gsub(/^\s{2}/, '') %>"),
+    notify  => Service['skydive-agent'],
   }
 
 }
