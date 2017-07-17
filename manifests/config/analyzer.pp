@@ -1,6 +1,18 @@
 # class skydive::config::analyzer
 class skydive::config::analyzer {
 
+  $common_config_hash = {
+    'host_id'                      => $::skydive::host_id,
+    'ws_pong_timeout'              => $::skydive::ws_pong_timeout,
+    'ws_bulk_maxmsg'               => $::skydive::ws_bulk_maxmsg,
+    'ws_bulk_maxdelay'             => $::skydive::ws_bulk_maxdelay,
+    'cache'                        => $::skydive::cache,
+    'logging'                      => $::skydive::logging,
+    'graph'                        => $::skydive::graph,
+    'analyzers'                    => $::skydive::analyzers,
+    'etcd'                         => $::skydive::etcd,
+  }
+
   $analyzer_config_hash = {
     'analyzer' => {
       'listen'                     => $::skydive::analyzer::listen,
@@ -22,7 +34,7 @@ class skydive::config::analyzer {
     }
   }
 
-  $merged_config_hash = merge($::skydive::configuration, $analyzer_config_hash)
+  $merged_config_hash = merge($common_config_hash, $analyzer_config_hash)
 
   file { '/etc/skydive/skydive-analyzer.yml':
     ensure  => file,
