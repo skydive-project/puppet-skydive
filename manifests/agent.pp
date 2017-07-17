@@ -13,9 +13,4 @@ class skydive::agent (
   contain ::skydive::config::agent
   contain ::skydive::service::agent
 
-  Class['::skydive']
-  -> Class['::skydive::install::agent']
-  -> Class['::skydive::config::agent']
-  -> Class['::skydive::service::agent']
-
 }

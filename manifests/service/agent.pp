@@ -6,7 +6,6 @@ class skydive::service::agent {
     enable     => true,
     hasrestart => true,
     hasstatus  => true,
-    subscribe  => Concat['/etc/skydive/skydive-agent.yml'],
     require    => File['/etc/systemd/system/skydive-agent.service'],
   }
 

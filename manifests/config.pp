@@ -21,24 +21,26 @@ class skydive::config {
   if defined('::skydive::agent') {
     concat {'/etc/skydive/skydive-agent.yml':
       ensure => present,
+      notify => Service['skydive-agent'],
     }
 
     concat::fragment {'agent_common':
       target  => '/etc/skydive/skydive-agent.yml',
       order   => '10',
-      content => inline_template("<%= ${common_config_hash}.to_yaml.gsub(/^\s{2}/, '') %>"),
+      content => $common_config_hash.to_yaml,
     }
   }
 
   if defined('::skydive::analyzer') {
     concat {'/etc/skydive/skydive-analyzer.yml':
       ensure => present,
+      notify => Service['skydive-analyzer'],
     }
 
     concat::fragment {'analyzer_common':
       target  => '/etc/skydive/skydive-analyzer.yml',
       order   => '10',
-      content => inline_template("<%= ${common_config_hash}.to_yaml.gsub(/^\s{2}/, '') %>"),
+      content => $common_config_hash.to_yaml,
     }
   }
 

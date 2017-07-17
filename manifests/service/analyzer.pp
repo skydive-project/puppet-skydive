@@ -6,7 +6,6 @@ class skydive::service::analyzer {
     enable     => true,
     hasrestart => true,
     hasstatus  => true,
-    subscribe  => Concat['/etc/skydive/skydive-analyzer.yml'],
     require    => File['/etc/systemd/system/skydive-analyzer.service'],
   }
 
@@ -19,7 +18,7 @@ class skydive::service::analyzer {
 
   exec { 'skydive-analyzer: reload systemd':
     command     => 'systemctl daemon-reload',
-    before      => Service['skydive-agent'],
+    before      => Service['skydive-analyzer'],
     path        => '/usr/bin:/usr/sbin:/bin:/usr/local/bin',
     refreshonly => true,
   }

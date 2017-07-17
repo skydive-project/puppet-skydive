@@ -22,10 +22,10 @@ class skydive::config::analyzer {
     }
   }
 
-  concat::fragment {'analyzers':
+  concat::fragment {'analyzer':
     target  => '/etc/skydive/skydive-analyzer.yml',
     order   => '20',
-    content => inline_template("<%= ${analyzer_config_hash}.to_yaml.gsub(/^\s{2}/, '') %>")
+    content => $analyzer_config_hash.to_yaml,
   }
 
 }

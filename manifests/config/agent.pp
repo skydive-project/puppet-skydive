@@ -15,7 +15,7 @@ class skydive::config::agent {
   concat::fragment {'agent':
     target  => '/etc/skydive/skydive-agent.yml',
     order   => '20',
-    content => inline_template("<%= ${agent_config_hash}.to_yaml.gsub(/^\s{2}/, '') %>"),
+    content => $agent_config_hash.to_yaml,
   }
 
 }
