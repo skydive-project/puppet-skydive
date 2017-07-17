@@ -27,7 +27,7 @@ class skydive::config::analyzer {
   file { '/etc/skydive/skydive-analyzer.yml':
     ensure  => file,
     mode    => '0644',
-    content => inline_template("<%= ${merged_config_hash}.to_yaml.gsub(/^\s{2}/, '') %>"),
+    content => inline_template("<%= @merged_config_hash.to_yaml.gsub(/^\s{2}/, '') %>"),
     notify  => Service['skydive-analyzer'],
   }
 

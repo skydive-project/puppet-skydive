@@ -17,7 +17,7 @@ class skydive::config::agent {
   file { '/etc/skydive/skydive-agent.yml':
     ensure  => file,
     mode    => '0644',
-    content => inline_template("<%= ${merged_config_hash}.to_yaml.gsub(/^\s{2}/, '') %>"),
+    content => inline_template("<%= @merged_config_hash.to_yaml.gsub(/^\s{2}/, '') %>"),
     notify  => Service['skydive-agent'],
   }
 
