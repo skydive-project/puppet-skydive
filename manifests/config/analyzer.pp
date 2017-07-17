@@ -22,10 +22,22 @@ class skydive::config::analyzer {
     }
   }
 
-  concat::fragment {'analyzer':
-    target  => '/etc/skydive/skydive-analyzer.yml',
+  concat {'skydive-analyzer':
+    ensure => present,
+    path   => '/etc/skydive/skydive-analyzer.yml',
+    notify => Service['skydive-analyzer']
+  }
+
+  concat::fragment {'skydive-analyzer-common':
+    target  => 'skydive-analyzer',
+    order   => '10',
+    content => inline_template("<%= scope.lookupvar('skydive::configuration').to_yaml.gsub(/^\s{2}/, '') %>"),
+  }
+
+  concat::fragment {'skydive-analyzer-main':
+    target  => 'skydive-analyzer',
     order   => '20',
-    content => $analyzer_config_hash.to_yaml,
+    content => inline_template("<%= ${analyzer_config_hash}.to_yaml.gsub(/^\s{2}/, '') %>"),
   }
 
 }

@@ -3,35 +3,33 @@ class skydive::params {
 
   $manage_repo                         = true
 
-  $host_id                             = $::hostname
-
-  $ws_pong_timeout                     = 5
-  $ws_bulk_maxmsg                      = 100
-  $ws_bulk_maxdelay                    = 2
-
-  $logging                             = {
-    'level' => 'INFO',
+  $configuration                       = {
+    'host_id' => $::hostname,
+    'level'   => 'INFO',
     'backends' => [
       'syslog',
     ],
-  }
-  $graph                               = {
-    'backend' => 'memory'
-  }
-  $cache                               = {
-    'expire'  => 300,
-    'cleanup' => 30,
-  }
-  $analyzers                           = [
-    '127.0.0.1:8082',
-  ]
-  $etcd                                = {
-    'embedded'       => true,
-    'listen'         => '0.0.0.0:2379',
-    'servers'        => [
-      'http://127.0.0.1:2379',
+    'graph'   => {
+      'backend' => 'memory',
+    },
+    'cache'   => {
+      'expire'  => 300,
+      'cleanup' => 30,
+    },
+    'analyzers' => [
+      '127.0.0.1:8082',
     ],
-    'client_timeout' => 5,
+    'etcd'      => {
+      'embedded'       => true,
+      'listen'         => '0.0.0.0:2379',
+      'servers'        => [
+        'http://127.0.0.1:2379',
+      ],
+      'client_timeout' => 5,
+    },
+    'ws_pong_timeout'   => 5,
+    'ws_bulk_maxmsg'    => 100,
+    'ws_bulk_maxdelay'  => 2,
   }
 
   $analyzer_listen                     = '0.0.0.0:8082'

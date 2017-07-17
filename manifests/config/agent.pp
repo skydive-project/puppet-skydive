@@ -12,10 +12,22 @@ class skydive::config::agent {
     }
   }
 
-  concat::fragment {'agent':
-    target  => '/etc/skydive/skydive-agent.yml',
+  concat {'skydive-agent':
+    ensure => present,
+    path   => '/etc/skydive/skydive-agent.yml',
+    notify => Service['skydive-agent']
+  }
+
+  concat::fragment {'skydive-agent-common':
+    target  => 'skydive-agent',
+    order   => '10',
+    content => inline_template("<%= scope.lookupvar('skydive::configuration').to_yaml.gsub(/^\s{2}/, '') %>"),
+  }
+
+  concat::fragment {'skydive-agent-main':
+    target  => 'skydive-agent',
     order   => '20',
-    content => $agent_config_hash.to_yaml,
+    content => inline_template("<%= ${agent_config_hash}.to_yaml.gsub(/^\s{2}/, '') %>"),
   }
 
 }
