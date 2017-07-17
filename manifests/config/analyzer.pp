@@ -1,5 +1,5 @@
 # class skydive::config::analyzer
-class skydive::config::analyzer inherits ::skydive::config::common {
+class skydive::config::analyzer {
 
   $analyzer_config_hash = {
     'analyzer' => {
@@ -22,7 +22,19 @@ class skydive::config::analyzer inherits ::skydive::config::common {
     }
   }
 
-  $merged_config_hash = merge($::skydive::config::common::common_config_hash, $analyzer_config_hash)
+  $common_config_hash = {
+    'host_id'                      => $::skydive::host_id,
+    'ws_pong_timeout'              => $::skydive::ws_pong_timeout,
+    'ws_bulk_maxmsg'               => $::skydive::ws_bulk_maxmsg,
+    'ws_bulk_maxdelay'             => $::skydive::ws_bulk_maxdelay,
+    'cache'                        => $::skydive::cache,
+    'logging'                      => $::skydive::logging,
+    'graph'                        => $::skydive::graph,
+    'analyzers'                    => $::skydive::analyzers,
+    'etcd'                         => $::skydive::etcd,
+  }
+
+  $merged_config_hash = merge($common_config_hash, $analyzer_config_hash)
 
   $config = inline_template("<%= ${merged_config_hash}.to_yaml.gsub(/^\s{2}/, '') %>")
 
