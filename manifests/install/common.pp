@@ -9,11 +9,13 @@ class skydive::install::common {
           descr    => 'Community Build Service',
           enabled  => '1',
           gpgcheck => '0',
+          before   => [Package['skydive-agent'], Package['skydive-analyzer']],
           notify   => Exec['yum-clean-expire-cache'],
         }
 
         exec { 'yum-clean-expire-cache':
           command     => '/usr/bin/yum clean expire-cache',
+          before      => [Package['skydive-agent'], Package['skydive-analyzer']],
           refreshonly => true,
         }
 

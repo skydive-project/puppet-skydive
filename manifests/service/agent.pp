@@ -6,12 +6,12 @@ class skydive::service::agent {
     enable     => true,
     hasrestart => true,
     hasstatus  => true,
-    require    => File['/etc/systemd/system/skydive-agent.service'],
   }
 
   file { '/etc/systemd/system/skydive-agent.service':
     ensure => file,
     mode   => '0644',
+    before => Service['skydive-agent'],
     source => 'puppet:///modules/skydive/service/systemd_agent',
     notify => Service['skydive-agent'],
   }
@@ -21,6 +21,7 @@ class skydive::service::agent {
     before      => Service['skydive-agent'],
     path        => '/usr/bin:/usr/sbin:/bin:/usr/local/bin',
     refreshonly => true,
+    require     => File['/etc/systemd/system/skydive-agent.service'],
   }
 
 }
