@@ -3,7 +3,7 @@ class skydive::params {
 
   $manage_repo                         = true
 
-  $host_id                             = $::hostname
+  $host_id                             = $::fqdn
   $ws_pong_timeout                     = 5
   $ws_bulk_maxmsg                      = 100
   $ws_bulk_maxdelay                    = 2
