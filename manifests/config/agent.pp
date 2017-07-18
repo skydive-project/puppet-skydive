@@ -24,7 +24,11 @@ class skydive::config::agent {
     }
   }
 
-  $merged_config_hash = merge($common_config_hash, $agent_config_hash)
+  $agent_extra_config   = {
+    'agent'                        => $::skydive::agent::extra_config,
+  }
+
+  $merged_config_hash = deep_merge($common_config_hash, $::skydive::extra_config, $agent_config_hash, $agent_extra_config)
 
   file { '/etc/skydive/skydive-agent.yml':
     ensure  => file,

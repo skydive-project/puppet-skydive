@@ -34,7 +34,11 @@ class skydive::config::analyzer {
     }
   }
 
-  $merged_config_hash = merge($common_config_hash, $analyzer_config_hash)
+  $analyzer_extra_config = {
+    'analyzer'                     => $::skydive::analyzer::extra_config,
+  }
+
+  $merged_config_hash = deep_merge($common_config_hash, $::skydive::extra_config, $analyzer_config_hash, $analyzer_extra_config)
 
   file { '/etc/skydive/skydive-analyzer.yml':
     ensure  => file,

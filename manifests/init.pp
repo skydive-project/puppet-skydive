@@ -10,6 +10,7 @@ class skydive (
   $ws_pong_timeout  = $::skydive::params::ws_pong_timeout,
   $ws_bulk_maxmsg   = $::skydive::params::ws_bulk_maxmsg,
   $ws_bulk_maxdelay = $::skydive::params::ws_bulk_maxdelay,
+  $extra_config     = {},
 ) inherits ::skydive::params {
 
   contain ::skydive::install::common
