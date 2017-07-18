@@ -61,6 +61,28 @@ class skydive::params {
     ]
   }
   $agent_metadata                      = {
-    'info' => "This is compute node ${::fqdn}"
+    'info'                      => "This is compute node ${::fqdn}",
+    'environment'               => $::environment,
+    'bla'                       => $::bla,
+    'domain'                    => $::domain,
+    'is_virtual'                => $::is_virtual,
+    'architecture'              => $::architecture,
+    'operatingsystem'           => $::operatingsystem,
+    'operatingsystemmajrelease' => $::operatingsystemmajrelease,
+    'operatingsystemrelease'    => $::operatingsystemrelease,
+    'osfamily'                  => $::osfamily,
+    'physicalprocessorcount'    => $::physicalprocessorcount,
+    'processorcount'            => $::processorcount,
+    'kernel'                    => $::kernel,
+    'kernelmajversion'          => $::kernelmajversion,
+    'kernelrelease'             => $::kernelrelease,
+    'selinux'                   => $::selinux,
+    'selinux_config_mode'       => $::selinux_config_mode,
+    'selinux_config_policy'     => $::selinux_config_policy,
+    'selinux_current_mode'      => $::selinux_current_mode,
+    'selinux_enforced'          => $::selinux_enforced,
+    'selinux_policyversion'     => $::selinux_policyversion,
+    'timezone'                  => $::timezone,
+    'virtual'                   => $::virtual,
   }
 }

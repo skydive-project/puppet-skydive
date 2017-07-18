@@ -20,7 +20,7 @@ class skydive::config::agent {
       'X509_key'                   => $::skydive::agent::x509_key,
       'topology'                   => $::skydive::agent::topology,
       'flow'                       => $::skydive::agent::flow,
-      'metadata'                   => $::skydive::agent::metadata,
+      'metadata'                   => delete_undef_values($::skydive::agent::metadata),
     }
   }
 
