@@ -9,19 +9,24 @@ class skydive::install::common {
           descr    => 'Community Build Service',
           enabled  => '1',
           gpgcheck => '0',
-          before   => [Package['skydive-agent'], Package['skydive-analyzer']],
-          notify   => Exec['yum-clean-expire-cache'],
         }
-
-        exec { 'yum-clean-expire-cache':
+        ~> exec { 'yum-clean-expire-cache':
           command     => '/usr/bin/yum clean expire-cache',
-          before      => [Package['skydive-agent'], Package['skydive-analyzer']],
+          before      => [
+            Package['skydive-agent'],
+            Package['skydive-analyzer'],
+            Package['skydive'],
+          ],
           refreshonly => true,
         }
 
         package { 'skydive':
-          ensure  => installed,
-          require => Yumrepo['opstools7-sensu-common-release'],
+          ensure => installed,
+        }
+        ~> exec { 'skydive: reload systemd':
+          command     => 'systemctl daemon-reload',
+          path        => '/usr/bin:/usr/sbin:/bin:/usr/local/bin',
+          refreshonly => true,
         }
 
       }

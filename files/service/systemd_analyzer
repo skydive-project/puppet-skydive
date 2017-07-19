@@ -1,5 +1,6 @@
 [Unit]
 Description=Skydive analyzer
+Wants=network-online.target
 After=network-online.target elasticsearch.service
 
 [Service]

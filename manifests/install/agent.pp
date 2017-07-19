@@ -5,7 +5,7 @@ class skydive::install::agent {
     'RedHat': {
       package { 'skydive-agent':
         ensure => installed,
-        notify => Exec['skydive-agent: reload systemd'],
+        notify => Exec['skydive: reload systemd'],
       }
     }
     default: {
