@@ -3,9 +3,15 @@ class skydive::install::agent {
 
   case $::osfamily {
     'RedHat': {
-      package { 'skydive-agent':
-        ensure => installed,
-        notify => Exec['skydive: reload systemd'],
+      if $::operatingsystemmajrelease >= 7 {
+        package { 'skydive-agent':
+          ensure => installed,
+          notify => Exec['skydive: reload systemd'],
+        }
+      } else {
+        package { 'skydive-agent':
+          ensure => installed,
+        }
       }
     }
     default: {

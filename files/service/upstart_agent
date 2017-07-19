@@ -1,0 +1,26 @@
+# Managed by Puppet
+author "Christophe Vanlancker <carroarmato0@inuits.eu>"
+description "Skydive Agent"
+
+# Set variables
+env pid_file=/var/run/skydive-agent.pid
+env config=/etc/skydive/skydive-agent.yml
+
+# Start ....
+start on started network-services
+stop on shutdown
+
+script
+    . /etc/sysconfig/skydive-agent
+    echo $$ > $pid_file
+    exec /usr/bin/skydive agent $SKYDIVE_AGENT_OPTIONS --conf $config
+end script
+
+pre-start script
+    echo "[`date`] Skydive Agent Starting"
+end script
+
+pre-stop script
+    rm $pid_file
+    echo "[`date`] Skydive Agent Stopping"
+end script

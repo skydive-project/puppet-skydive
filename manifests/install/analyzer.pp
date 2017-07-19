@@ -3,9 +3,15 @@ class skydive::install::analyzer {
 
   case $::osfamily {
     'RedHat': {
-      package { 'skydive-analyzer':
-        ensure => installed,
-        notify => Exec['skydive: reload systemd'],
+      if $::operatingsystemmajrelease >= 7 {
+        package { 'skydive-analyzer':
+          ensure => installed,
+          notify => Exec['skydive: reload systemd'],
+        }
+      } else {
+        package { 'skydive-analyzer':
+          ensure => installed,
+        }
       }
     }
     default: {

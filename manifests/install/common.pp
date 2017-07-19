@@ -10,7 +10,7 @@ class skydive::install::common {
           enabled  => '1',
           gpgcheck => '0',
         }
-        ~> exec { 'yum-clean-expire-cache':
+        exec { 'yum-clean-expire-cache':
           command     => '/usr/bin/yum clean expire-cache',
           before      => [
             Package['skydive-agent'],
@@ -19,21 +19,35 @@ class skydive::install::common {
           ],
           refreshonly => true,
         }
-
-        package { 'skydive':
-          ensure => installed,
-        }
-        ~> exec { 'skydive: reload systemd':
-          command     => 'systemctl daemon-reload',
-          path        => '/usr/bin:/usr/sbin:/bin:/usr/local/bin',
-          refreshonly => true,
-        }
-
       }
       default: {
         fail("Module ${module_name} is not supported on osfamily '${::osfamily}'")
       }
     }
+  }
+
+  case $::osfamily {
+    'RedHat': {
+      if $::operatingsystemmajrelease >= 7 {
+        exec { 'skydive: reload systemd':
+          command     => 'systemctl daemon-reload',
+          path        => '/usr/bin:/usr/sbin:/bin:/usr/local/bin',
+          refreshonly => true,
+          subscribe   => [
+            Package['skydive-agent'],
+            Package['skydive-analyzer'],
+            Package['skydive'],
+          ],
+        }
+      }
+    }
+    default: {
+      fail("Module ${module_name} is not supported on osfamily '${::osfamily}'")
+    }
+  }
+
+  package { 'skydive':
+    ensure => installed,
   }
 
 }

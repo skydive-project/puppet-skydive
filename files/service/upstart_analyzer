@@ -1,0 +1,26 @@
+# Managed by Puppet
+author "Christophe Vanlancker <carroarmato0@inuits.eu>"
+description "Skydive Analyzer"
+
+# Set variables
+env pid_file=/var/run/skydive-analyzer.pid
+env config=/etc/skydive/skydive-analyzer.yml
+
+# Start ....
+start on started network-services
+stop on shutdown
+
+script
+    . /etc/sysconfig/skydive-analyzer
+    echo $$ > $pid_file
+    exec /usr/bin/skydive analyzer $SKYDIVE_ANALYZER_OPTIONS --conf $config
+end script
+
+pre-start script
+    echo "[`date`] Skydive Analyzer Starting"
+end script
+
+pre-stop script
+    rm $pid_file
+    echo "[`date`] Skydive Analyzer Stopping"
+end script
