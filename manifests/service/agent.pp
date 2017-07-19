@@ -10,7 +10,7 @@ class skydive::service::agent {
 
   case $::osfamily {
     'RedHat': {
-      if $::operatingsystemmajrelease >= 7 {
+      if versioncmp($::operatingsystemmajrelease, '7') >= 0 {
         file { '/etc/systemd/system/skydive-agent.service':
           ensure => file,
           mode   => '0644',

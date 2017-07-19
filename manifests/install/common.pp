@@ -28,7 +28,7 @@ class skydive::install::common {
 
   case $::osfamily {
     'RedHat': {
-      if $::operatingsystemmajrelease >= 7 {
+      if versioncmp($::operatingsystemmajrelease, '7') >= 0 {
         exec { 'skydive: reload systemd':
           command     => 'systemctl daemon-reload',
           path        => '/usr/bin:/usr/sbin:/bin:/usr/local/bin',

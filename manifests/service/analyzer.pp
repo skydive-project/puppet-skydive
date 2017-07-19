@@ -10,7 +10,7 @@ class skydive::service::analyzer {
 
   case $::osfamily {
     'RedHat': {
-      if $::operatingsystemmajrelease >= 7 {
+      if versioncmp($::operatingsystemmajrelease, '7') >= 0 {
         file { '/etc/systemd/system/skydive-analyzer.service':
           ensure => file,
           mode   => '0644',
