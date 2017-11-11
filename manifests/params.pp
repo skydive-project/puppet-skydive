@@ -2,6 +2,9 @@
 class skydive::params {
 
   $manage_repo                         = true
+  $installation_type                   = 'web'
+  $version                             = '0.13.0'
+  $web_checksum                        = '34bbe7910d6086ae7a6b1f03dd52b84d2255e1fe'
 
   $host_id                             = $::fqdn
   $ws_pong_timeout                     = 5

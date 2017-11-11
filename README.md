@@ -24,10 +24,18 @@ This module relies on hiera in order to manage the common settings in the skydiv
 
 * hiera
 * [concat](https://github.com/puppetlabs/puppetlabs-concat) <= 2.2.1
+* [stdlib](https://github.com/puppetlabs/puppetlabs-stdlib) <= 4.7.1
+* [archive](https://github.com/voxpupuli/puppet-archive.git) <= 1.2.0
 
 ### What skydive affects
 
 The module offers a class to install and manage the Skydive Analyzer and Agent separately.
+
+Depending on the configuration, it may affect:
+
+* Management of the Yum Repository
+* Management of the skydive binary
+* Skydive RPM packages
 
 ### Beginning with skydive
 
@@ -78,6 +86,24 @@ Change default address and port of the analyzer's UI. (don't forget to correct t
 ---
 skydive::analyzer::listen: 0.0.0.0:80
 ```
+
+Specify a specific version through Web installation
+
+```
+---
+skydive::installation_type: web
+skydive::version: 0.12.0
+skydive::web_checksum: '66959586f0865e39f9a66cf30f2b87de5b10921a'
+```
+
+Specify a Package installation
+
+```
+---
+skydive::installation_type: package
+skydive::version: present
+```
+
 
 ## Limitations
 

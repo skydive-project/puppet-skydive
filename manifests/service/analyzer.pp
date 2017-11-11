@@ -1,22 +1,46 @@
 # class skydive::service::analyzer
 class skydive::service::analyzer {
 
-  service { 'skydive-analyzer':
-    ensure     => running,
-    enable     => true,
-    hasrestart => true,
-    hasstatus  => true,
+  case $::skydive::installation_type {
+    'web': {
+      service { 'skydive-analyzer':
+        ensure     => running,
+        enable     => true,
+        hasrestart => true,
+        hasstatus  => true,
+        subscribe  => [
+         Archive['/usr/bin/skydive'],
+         File['/usr/bin/skydive'],
+       ],
+      }
+    }
+    default: {
+      service { 'skydive-analyzer':
+        ensure     => running,
+        enable     => true,
+        hasrestart => true,
+        hasstatus  => true,
+        subscribe  => Package['skydive'],
+      }
+    }
   }
 
   case $::osfamily {
     'RedHat': {
       if versioncmp($::operatingsystemmajrelease, '7') >= 0 {
+
+        exec { 'skydive-analyzer: reload systemd':
+          command     => 'systemctl daemon-reload',
+          path        => '/usr/bin:/usr/sbin:/bin:/usr/local/bin',
+          refreshonly => true,
+        }
+
         file { '/etc/systemd/system/skydive-analyzer.service':
           ensure => file,
           mode   => '0644',
           source => 'puppet:///modules/skydive/service/systemd_analyzer',
           notify => [
-            Exec['skydive: reload systemd'],
+            Exec['skydive-analyzer: reload systemd'],
             Service['skydive-analyzer'],
           ],
         }
