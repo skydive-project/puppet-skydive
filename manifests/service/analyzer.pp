@@ -4,7 +4,7 @@ class skydive::service::analyzer {
   case $::skydive::installation_type {
     'web': {
       service { 'skydive-analyzer':
-        ensure     => running,
+        ensure     => $::skydive::analyzer::service,
         enable     => true,
         hasrestart => true,
         hasstatus  => true,
@@ -16,7 +16,7 @@ class skydive::service::analyzer {
     }
     default: {
       service { 'skydive-analyzer':
-        ensure     => running,
+        ensure     => $::skydive::analyzer::service,
         enable     => true,
         hasrestart => true,
         hasstatus  => true,

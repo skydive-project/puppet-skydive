@@ -4,7 +4,7 @@ class skydive::service::agent {
   case $::skydive::installation_type {
     'web': {
       service { 'skydive-agent':
-        ensure     => running,
+        ensure     => $::skydive::agent::service,
         enable     => true,
         hasrestart => true,
         hasstatus  => true,
@@ -16,7 +16,7 @@ class skydive::service::agent {
     }
     default: {
       service { 'skydive-agent':
-        ensure     => running,
+        ensure     => $::skydive::agent::service,
         enable     => true,
         hasrestart => true,
         hasstatus  => true,

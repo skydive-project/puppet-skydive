@@ -1,5 +1,6 @@
 # class skydive::analyzer
 class skydive::analyzer (
+  $service                    = 'running',
   $listen                     = $::skydive::params::analyzer_listen,
   $x509_cert                  = '',
   $x509_key                   = '',

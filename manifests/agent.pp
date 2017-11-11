@@ -1,5 +1,6 @@
 # class skydive::agent
 class skydive::agent (
+  $service      = 'running',
   $listen       = $::skydive::params::agent_listen,
   $x509_cert    = '',
   $x509_key     = '',
