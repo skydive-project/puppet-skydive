@@ -11,7 +11,6 @@ class skydive::agent (
 ) inherits ::skydive {
 
   contain ::skydive
-  contain ::skydive::install::agent
   contain ::skydive::config::agent
   contain ::skydive::service::agent
 

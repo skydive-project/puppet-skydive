@@ -20,7 +20,6 @@ class skydive::analyzer (
   $extra_config               = {},
 ) inherits ::skydive {
 
-  contain ::skydive::install::analyzer
   contain ::skydive::config::analyzer
   contain ::skydive::service::analyzer
 

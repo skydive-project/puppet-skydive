@@ -15,8 +15,6 @@ class skydive::install::web {
 
   $skydive_packages = [
     'skydive',
-    'skydive-agent',
-    'skydive-analyzer',
   ]
 
   # Ensure Skydive packages are removed if already present
